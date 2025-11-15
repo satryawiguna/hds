@@ -8,6 +8,7 @@ import { errorMiddleware } from "./middlewares/error.middleware";
 import { swaggerAuthMiddleware } from "./middlewares/swagger-auth.middleware";
 import { modules } from "./modules";
 import { swaggerSpec } from "./config/swagger.config";
+import { env } from "./config/env.config";
 
 export const createServer = (): Express => {
   const app = express();
@@ -18,7 +19,17 @@ export const createServer = (): Express => {
       contentSecurityPolicy: false, // Disable CSP for Swagger UI to work
     })
   );
-  app.use(cors());
+
+  // CORS configuration - allow credentials and specific origins
+  app.use(
+    cors({
+      origin: env.corsOrigins,
+      credentials: true,
+      methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+      allowedHeaders: ["Content-Type", "Authorization"],
+      exposedHeaders: ["Set-Cookie"],
+    })
+  );
 
   // Body parsing middleware
   app.use(express.json());

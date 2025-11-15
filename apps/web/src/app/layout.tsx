@@ -1,10 +1,12 @@
-import type { Metadata } from 'next';
-import { QueryProvider } from '@/providers/QueryProvider';
-import '@/styles/globals.css';
+import type { Metadata } from "next";
+import { QueryProvider } from "@/providers/QueryProvider";
+import { AuthProvider } from "@/providers/AuthProvider";
+import { Toaster } from "@/components/atoms/Toaster";
+import "@/styles/globals.css";
 
 export const metadata: Metadata = {
-  title: 'HDS Pseudo',
-  description: 'Happy Day Services - Clean Architecture Monorepo',
+  title: "HDS",
+  description: "Happy Day Services - Clean Architecture Monorepo",
 };
 
 export default function RootLayout({
@@ -15,7 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          <AuthProvider>{children}</AuthProvider>
+          <Toaster />
+        </QueryProvider>
       </body>
     </html>
   );
