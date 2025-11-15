@@ -29,28 +29,31 @@ export class TaskRepository implements ITaskRepository {
     limit?: number,
     filters?: { key?: string; status?: TaskStatus }
   ): Promise<{ tasks: Task[]; total: number }> {
-    const query = this.db<TaskModel>("tasks");
+    let query = this.db<TaskModel>("tasks");
+    let countQuery = this.db<TaskModel>("tasks");
 
-    // Apply filters
     if (filters?.key) {
-      query.where("title", "ilike", `%${filters.key}%`);
+      query = query.whereRaw("LOWER(title) LIKE ?", [
+        `%${filters.key.toLowerCase()}%`,
+      ]);
+      countQuery = countQuery.whereRaw("LOWER(title) LIKE ?", [
+        `%${filters.key.toLowerCase()}%`,
+      ]);
     }
 
     if (filters?.status) {
-      query.where("status", filters.status);
+      query = query.where("status", filters.status);
+      countQuery = countQuery.where("status", filters.status);
     }
 
-    // Get total count with filters applied
-    const countResult = await query
-      .clone()
+    const countResult = await countQuery
       .count<Record<string, number>>("* as count")
       .first();
     const totalCount = countResult ? Number(countResult.count) : 0;
 
-    // Apply pagination if provided
     if (page && limit) {
       const offset = (page - 1) * limit;
-      query.offset(offset).limit(limit);
+      query = query.offset(offset).limit(limit);
     }
 
     const models = await query.orderBy("created_at", "desc");
