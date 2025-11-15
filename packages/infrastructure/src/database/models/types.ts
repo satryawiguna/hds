@@ -24,3 +24,22 @@ export interface ProfileModel {
   created_at: Date;
   updated_at: Date;
 }
+
+export interface TaskModel {
+  id: string;
+  title: string;
+  description: string;
+  status: "to do" | "in progress" | "done";
+  created_by: string;
+  created_at: Date;
+  updated_at: Date;
+}
+
+export interface TaskAssignmentModel {
+  id: string;
+  task_id: string;
+  user_id: string;
+  project_id: string | null;
+  created_at: Date;
+  updated_at: Date;
+}

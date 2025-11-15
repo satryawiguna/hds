@@ -9,3 +9,8 @@ export * from "./user/GetUserByIdUseCase";
 export * from "./user/GetAllUsersUseCase";
 export * from "./user/UpdateUserUseCase";
 export * from "./user/DeleteUserUseCase";
+export * from "./task/CreateTaskUseCase";
+export * from "./task/GetAllTasksUseCase";
+export * from "./task/GetTaskByIdUseCase";
+export * from "./task/UpdateTaskUseCase";
+export * from "./task/DeleteTaskUseCase";
