@@ -1,0 +1,4 @@
+
+> @hds/web@0.1.0 type-check /Users/satryawiguna/Documents/Practices/happy-day-services/hds-pseudo/apps/web
+> tsc --noEmit
+

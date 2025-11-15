@@ -1,8 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/.pnp
+node_modules/
+.pnp
 .pnp.*
 .yarn/*
 !.yarn/patches
@@ -10,15 +10,23 @@
 !.yarn/releases
 !.yarn/versions
 
+# lock files from other package managers (only use pnpm)
+package-lock.json
+yarn.lock
+
 # testing
-/coverage
+coverage/
 
 # next.js
-/.next/
-/out/
+.next/
+out/
 
 # production
-/build
+build/
+dist/
+
+# turbo
+.turbo
 
 # misc
 .DS_Store
