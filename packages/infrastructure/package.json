@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@hds/core": "workspace:*",
+    "@hds/shared": "workspace:*",
     "knex": "^3.1.0",
     "mysql2": "^3.6.5",
     "bcryptjs": "^2.4.3",

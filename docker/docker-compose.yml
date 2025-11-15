@@ -39,6 +39,7 @@ services:
       DB_PASSWORD: password
       DB_NAME: hds_db
       JWT_SECRET: your-secret-key-change-in-production
+      SEED_DB: "false"
     ports:
       - "3001:3001"
     depends_on:
@@ -46,7 +47,7 @@ services:
         condition: service_healthy
     networks:
       - hds-network
-    command: sh -c "sleep 10 && node apps/api/dist/main.js"
+    command: sh -c "sleep 5 && npx knex migrate:latest --knexfile knexfile.ts && if [ \"$$SEED_DB\" = \"true\" ]; then npx knex seed:run --knexfile knexfile.ts; fi && node apps/api/dist/main.js"
 
   # Frontend Web
   web:
@@ -62,6 +63,23 @@ services:
       - "3000:3000"
     depends_on:
       - api
+    networks:
+      - hds-network
+
+  # phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: hds-phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: hds_user
+      PMA_PASSWORD: password
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
     networks:
       - hds-network
 

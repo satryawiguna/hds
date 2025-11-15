@@ -18,7 +18,12 @@
     "test:integration": "turbo run test:integration",
     "docker:up": "docker-compose -f docker/docker-compose.yml up -d",
     "docker:down": "docker-compose -f docker/docker-compose.yml down",
-    "docker:build": "docker-compose -f docker/docker-compose.yml build"
+    "docker:build": "docker-compose -f docker/docker-compose.yml build",
+    "db:migrate": "knex migrate:latest --knexfile knexfile.ts",
+    "db:migrate:make": "knex migrate:make --knexfile knexfile.ts",
+    "db:migrate:rollback": "knex migrate:rollback --knexfile knexfile.ts",
+    "db:seed": "knex seed:run --knexfile knexfile.ts",
+    "db:seed:make": "knex seed:make --knexfile knexfile.ts"
   },
   "devDependencies": {
     "typescript": "^5.3.3",
@@ -27,6 +32,10 @@
     "eslint": "^9.0.0",
     "@typescript-eslint/parser": "^8.0.0",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
-    "prettier": "^3.1.1"
+    "prettier": "^3.1.1",
+    "knex": "^3.1.0",
+    "tsx": "^4.7.0",
+    "ts-node": "^10.9.2",
+    "dotenv": "^16.3.1"
   }
 }

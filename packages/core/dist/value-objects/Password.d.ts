@@ -1,7 +1,9 @@
 export declare class Password {
     private readonly value;
-    constructor(password: string, isHashed?: boolean);
+    private readonly minLength;
+    constructor(password: string, skipValidation?: boolean);
     private isValid;
-    getValue(): string;
+    toString(): string;
+    static fromHash(hash: string): Password;
 }
 //# sourceMappingURL=Password.d.ts.map

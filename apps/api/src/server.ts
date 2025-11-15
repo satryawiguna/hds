@@ -2,15 +2,22 @@ import express, { Express, Router } from "express";
 import cors from "cors";
 import helmet from "helmet";
 import compression from "compression";
+import swaggerUi from "swagger-ui-express";
 import { loggerMiddleware } from "./middlewares/logger.middleware";
 import { errorMiddleware } from "./middlewares/error.middleware";
+import { swaggerAuthMiddleware } from "./middlewares/swagger-auth.middleware";
 import { modules } from "./modules";
+import { swaggerSpec } from "./config/swagger.config";
 
 export const createServer = (): Express => {
   const app = express();
 
-  // Security middleware
-  app.use(helmet());
+  // Security middleware (with exemptions for Swagger UI)
+  app.use(
+    helmet({
+      contentSecurityPolicy: false, // Disable CSP for Swagger UI to work
+    })
+  );
   app.use(cors());
 
   // Body parsing middleware
@@ -24,8 +31,49 @@ export const createServer = (): Express => {
   app.use(loggerMiddleware);
 
   // Health check endpoint
+  /**
+   * @openapi
+   * /health:
+   *   get:
+   *     tags:
+   *       - Health
+   *     summary: Health check endpoint
+   *     description: Returns the health status of the API
+   *     security: []
+   *     responses:
+   *       200:
+   *         description: API is healthy
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 status:
+   *                   type: string
+   *                   example: ok
+   *                 timestamp:
+   *                   type: string
+   *                   format: date-time
+   */
   app.get("/health", (_req, res) => {
     res.json({ status: "ok", timestamp: new Date().toISOString() });
+  });
+
+  // Swagger documentation routes (protected with basic auth)
+  app.use(
+    "/api-docs",
+    swaggerAuthMiddleware,
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerSpec, {
+      customCss: ".swagger-ui .topbar { display: none }",
+      customSiteTitle: "HDS API Documentation",
+    })
+  );
+
+  // Swagger JSON endpoint (also protected)
+  app.get("/api-docs.json", swaggerAuthMiddleware, (_req, res) => {
+    res.setHeader("Content-Type", "application/json");
+    res.send(swaggerSpec);
   });
 
   // API routes
