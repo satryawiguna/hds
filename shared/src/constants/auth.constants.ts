@@ -28,6 +28,10 @@ export const API_ENDPOINTS = {
   USER: {
     ME: "/users/me",
   },
+  TASK: {
+    BASE: "/tasks",
+    BY_ID: (id: string) => `/tasks/${id}`,
+  },
 } as const;
 
 export const AUTH_STORAGE_KEYS = {

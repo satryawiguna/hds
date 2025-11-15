@@ -10,3 +10,15 @@ export {
   CardContent,
 } from "./Card";
 export { Alert, AlertTitle, AlertDescription } from "./Alert";
+export { Select, type SelectProps, type SelectOption } from "./Select";
+export { Badge, badgeVariants, type BadgeProps } from "./Badge";
+export { SearchInput, type SearchInputProps } from "./SearchInput";
+export { Textarea, type TextareaProps } from "./Textarea";
+export {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+} from "./Dialog";
