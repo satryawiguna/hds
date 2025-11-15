@@ -2,25 +2,45 @@
   "name": "hds",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "shared"
+  ],
   "scripts": {
-    "dev": "next dev --webpack",
-    "build": "next build --webpack",
-    "start": "next start",
-    "lint": "eslint"
-  },
-  "dependencies": {
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
-    "next": "16.0.1"
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "start": "turbo run start",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
+    "test": "turbo run test",
+    "test:unit": "turbo run test:unit",
+    "docker:up": "docker-compose -f docker/docker-compose.yml up -d",
+    "docker:down": "docker-compose -f docker/docker-compose.yml down",
+    "docker:build": "docker-compose -f docker/docker-compose.yml build",
+    "db:migrate": "knex migrate:latest --knexfile knexfile.ts",
+    "db:migrate:make": "knex migrate:make --knexfile knexfile.ts",
+    "db:migrate:rollback": "knex migrate:rollback --knexfile knexfile.ts",
+    "db:seed": "knex seed:run --knexfile knexfile.ts",
+    "db:seed:make": "knex seed:make --knexfile knexfile.ts"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
-    "eslint": "^9",
-    "eslint-config-next": "16.0.1"
+    "@faker-js/faker": "^10.1.0",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^20.10.6",
+    "@types/supertest": "^6.0.3",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "dotenv": "^16.3.1",
+    "eslint": "^9.0.0",
+    "jest": "^29.7.0",
+    "knex": "^3.1.0",
+    "prettier": "^3.1.1",
+    "supertest": "^7.1.4",
+    "ts-jest": "^29.4.5",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.7.0",
+    "turbo": "^1.11.2",
+    "typescript": "^5.3.3"
   }
 }
