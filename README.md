@@ -7,15 +7,15 @@ A full-stack monorepo project built with **Clean Architecture** principles, feat
 This project follows **Clean Architecture** (Hexagonal Architecture) with clear separation of concerns:
 
 ```
-┌─────────────────────────────────────────────────────────────┐
+┌──────────────────────────────────────────────────────────────┐
 │                          Apps Layer                          │
-│  ┌─────────────────┐              ┌─────────────────┐       │
-│  │   API (Express) │              │   Web (Next.js) │       │
-│  │   Controllers   │              │   React UI      │       │
-│  │   Routes        │              │   Components    │       │
-│  │   Middlewares   │              │   Hooks         │       │
-│  └────────┬────────┘              └─────────────────┘       │
-└───────────┼──────────────────────────────────────────────────┘
+│  ┌─────────────────┐              ┌─────────────────┐        │
+│  │   API (Express) │              │   Web (Next.js) │        │
+│  │   Controllers   │              │   React UI      │        │
+│  │   Routes        │              │   Components    │        │
+│  │   Middlewares   │              │   Hooks         │        │
+│  └────────┬────────┘              └─────────────────┘        │
+└───────────┼────────────────────────────────────────────────-─┘
             │
 ┌───────────┼──────────────────────────────────────────────────┐
 │           │         Core Business Layer                      │
@@ -39,7 +39,7 @@ This project follows **Clean Architecture** (Hexagonal Architecture) with clear 
 └──────────────────────────────────────────────────────────────┘
 ┌──────────────────────────────────────────────────────────────┐
 │                      Shared Layer                            │
-│  @hds/shared - Constants, Enums, Types, Validators          │
+│  @hds/shared - Constants, Enums, Types, Validators           │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -175,8 +175,13 @@ pnpm docker:up
 
 # Services will be available at:
 # - API: http://localhost:3001
+
 # - Web: http://localhost:3000
+https://jam.dev/c/650952f1-0a40-44b4-b40f-f0e000e953bf
+
 # - API Docs: http://localhost:3001/api-docs (admin/admin123)
+https://jam.dev/c/e6febec5-e2af-4a14-9d60-df4c5569a645
+
 # - phpMyAdmin: http://localhost:8080
 ```
 
