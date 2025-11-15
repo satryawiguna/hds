@@ -1,4 +1,4 @@
-# HDS (Happy Day Services) - Pseudo
+# HDS (Happy Day Services)
 
 A full-stack monorepo project built with **Clean Architecture** principles, featuring a RESTful API backend and a Next.js frontend for task management and user authentication.
 
