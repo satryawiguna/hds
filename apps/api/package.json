@@ -9,9 +9,12 @@
     "start": "node dist/main.js",
     "lint": "eslint src --ext .ts",
     "type-check": "tsc --noEmit",
-    "test": "jest --passWithNoTests",
-    "test:unit": "jest --testPathPattern=unit --passWithNoTests",
-    "test:integration": "jest --testPathPattern=integration --passWithNoTests"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:unit": "jest --testPathPattern=unit",
+    "test:integration": "jest --testPathPattern=integration",
+    "test:verbose": "jest --verbose"
   },
   "dependencies": {
     "@hds/core": "workspace:*",

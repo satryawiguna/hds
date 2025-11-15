@@ -26,7 +26,7 @@ import {
   forgotPasswordSchema,
   resetPasswordSchema,
   refreshTokenSchema,
-} from "../dtos";
+} from "@hds/shared";
 
 const userRepository = new UserRepository(db);
 const profileRepository = new ProfileRepository(db);
@@ -227,8 +227,8 @@ export class AuthController {
         abortEarly: false,
       });
       await resetPasswordUseCase.execute(
-        validatedData.token,
-        validatedData.newPassword
+        validatedData.token!,
+        validatedData.password
       );
 
       res.json(successResponse(null, "Password reset successfully"));

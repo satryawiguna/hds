@@ -41,6 +41,26 @@ export const createServer = (): Express => {
   // Logging middleware
   app.use(loggerMiddleware);
 
+  // Swagger documentation routes (protected with basic auth)
+  app.use(
+    "/api-docs",
+    swaggerAuthMiddleware,
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerSpec, {
+      customCss: ".swagger-ui .topbar { display: none }",
+      customSiteTitle: "HDS API Documentation",
+    })
+  );
+
+  // Swagger JSON endpoint (also protected)
+  app.get("/api-docs.json", swaggerAuthMiddleware, (_req, res) => {
+    res.setHeader("Content-Type", "application/json");
+    res.send(swaggerSpec);
+  });
+
+  // API routes
+  const apiRouter = Router();
+
   // Health check endpoint
   /**
    * @openapi
@@ -66,29 +86,10 @@ export const createServer = (): Express => {
    *                   type: string
    *                   format: date-time
    */
-  app.get("/health", (_req, res) => {
+  apiRouter.get("/health", (_req, res) => {
     res.json({ status: "ok", timestamp: new Date().toISOString() });
   });
 
-  // Swagger documentation routes (protected with basic auth)
-  app.use(
-    "/api-docs",
-    swaggerAuthMiddleware,
-    swaggerUi.serve,
-    swaggerUi.setup(swaggerSpec, {
-      customCss: ".swagger-ui .topbar { display: none }",
-      customSiteTitle: "HDS API Documentation",
-    })
-  );
-
-  // Swagger JSON endpoint (also protected)
-  app.get("/api-docs.json", swaggerAuthMiddleware, (_req, res) => {
-    res.setHeader("Content-Type", "application/json");
-    res.send(swaggerSpec);
-  });
-
-  // API routes
-  const apiRouter = Router();
   modules.forEach((module) => {
     apiRouter.use(module.path, module.router);
   });

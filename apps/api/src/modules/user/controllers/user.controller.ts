@@ -10,7 +10,7 @@ import {
 import { successResponse } from "../../../utils/response";
 import { paginate } from "../../../utils/pagination";
 import { AuthRequest } from "../../../middlewares/auth.middleware";
-import { updateUserSchema, getUsersQuerySchema } from "../dtos";
+import { updateUserSchema, getUsersQuerySchema } from "@hds/shared";
 
 const userRepository = new UserRepository(db);
 const profileRepository = new ProfileRepository(db);

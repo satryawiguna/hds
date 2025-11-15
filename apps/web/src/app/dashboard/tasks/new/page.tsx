@@ -12,10 +12,7 @@ import {
   CardTitle,
 } from "@/components/atoms/Card";
 import { useAuthStore } from "@/lib/store";
-import {
-  CreateTaskFormData,
-  UpdateTaskFormData,
-} from "@/validators/task.validators";
+import { CreateTaskFormData, UpdateTaskFormData } from "@hds/shared";
 
 export default function NewTaskPage() {
   const router = useRouter();
