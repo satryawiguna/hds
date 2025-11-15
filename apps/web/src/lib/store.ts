@@ -1,43 +1,50 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-
-interface User {
-  id: string;
-  email: string;
-  name: string;
-}
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import { UserWithProfileDTO } from "@hds/shared";
 
 interface AuthState {
-  user: User | null;
-  token: string | null;
+  user: UserWithProfileDTO | null;
   isAuthenticated: boolean;
-  login: (user: User, token: string) => void;
+  redirectPath: string | null;
+  accessToken: string | null;
+  refreshToken: string | null;
+  setUser: (user: UserWithProfileDTO | null) => void;
+  setAuthenticated: (isAuthenticated: boolean) => void;
+  setRedirectPath: (path: string | null) => void;
+  setTokens: (accessToken: string, refreshToken: string) => void;
   logout: () => void;
-  setUser: (user: User) => void;
 }
 
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
       user: null,
-      token: null,
       isAuthenticated: false,
-      login: (user, token) => {
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('token', token);
-        }
-        set({ user, token, isAuthenticated: true });
-      },
-      logout: () => {
-        if (typeof window !== 'undefined') {
-          localStorage.removeItem('token');
-        }
-        set({ user: null, token: null, isAuthenticated: false });
-      },
-      setUser: (user) => set({ user }),
+      redirectPath: null,
+      accessToken: null,
+      refreshToken: null,
+      setUser: (user) => set({ user, isAuthenticated: !!user }),
+      setAuthenticated: (isAuthenticated) => set({ isAuthenticated }),
+      setRedirectPath: (path) => set({ redirectPath: path }),
+      setTokens: (accessToken, refreshToken) =>
+        set({ accessToken, refreshToken }),
+      logout: () =>
+        set({
+          user: null,
+          isAuthenticated: false,
+          redirectPath: null,
+          accessToken: null,
+          refreshToken: null,
+        }),
     }),
     {
-      name: 'auth-storage',
+      name: "auth-storage",
+      partialize: (state) => ({
+        user: state.user,
+        isAuthenticated: state.isAuthenticated,
+        accessToken: state.accessToken,
+        refreshToken: state.refreshToken,
+      }),
     }
   )
 );

@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@source "../../src";
 
 :root {
   --foreground: rgb(0, 0, 0);
