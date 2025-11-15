@@ -177,6 +177,23 @@ describe("TaskRepository", () => {
         ["%task 1%"]
       );
     });
+
+    it("should filter tasks by createdBy", async () => {
+      const filteredTasks = [mockTasksData[0]];
+      (mockQueryBuilder.first as jest.Mock).mockResolvedValueOnce({ count: 1 });
+      mockQueryBuilder.orderBy.mockResolvedValue(filteredTasks);
+
+      const result = await taskRepository.findAll(undefined, undefined, {
+        createdBy: "user-1",
+      });
+
+      expect(mockQueryBuilder.where).toHaveBeenCalledWith(
+        "created_by",
+        "user-1"
+      );
+      expect(result.tasks).toHaveLength(1);
+      expect(result.tasks[0].createdBy).toBe("user-1");
+    });
   });
 
   describe("findByCreatedBy", () => {

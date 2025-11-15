@@ -8,7 +8,7 @@ export class GetAllTasksUseCase {
   async execute(
     page?: number,
     limit?: number,
-    filters?: { key?: string; status?: TaskStatus }
+    filters?: { key?: string; status?: TaskStatus; createdBy?: string }
   ): Promise<{ tasks: Task[]; total: number }> {
     return await this.taskRepository.findAll(page, limit, filters);
   }

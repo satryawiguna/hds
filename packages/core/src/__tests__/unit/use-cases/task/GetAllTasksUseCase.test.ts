@@ -134,6 +134,30 @@ describe("GetAllTasksUseCase", () => {
       expect(result.tasks.length).toBe(1);
     });
 
+    it("should retrieve tasks with createdBy filter", async () => {
+      const filters = { createdBy: "user-1" };
+      const filteredTasks = [mockTasks[0], mockTasks[2]];
+
+      mockTaskRepository.findAll.mockResolvedValue({
+        tasks: filteredTasks,
+        total: 2,
+      });
+
+      const result = await getAllTasksUseCase.execute(
+        undefined,
+        undefined,
+        filters
+      );
+
+      expect(mockTaskRepository.findAll).toHaveBeenCalledWith(
+        undefined,
+        undefined,
+        filters
+      );
+      expect(result.tasks).toEqual(filteredTasks);
+      expect(result.total).toBe(2);
+    });
+
     it("should return empty array when no tasks exist", async () => {
       mockTaskRepository.findAll.mockResolvedValue({
         tasks: [],

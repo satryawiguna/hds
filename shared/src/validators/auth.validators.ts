@@ -30,7 +30,7 @@ export const registerSchema = yup.object({
   confirmPassword: yup
     .string()
     .oneOf([yup.ref("password")], "Passwords must match")
-    .required("Confirm password is required"),
+    .optional(),
   firstName: yup
     .string()
     .min(2, "First name must be at least 2 characters")
