@@ -15,7 +15,6 @@
     "type-check": "turbo run type-check",
     "test": "turbo run test",
     "test:unit": "turbo run test:unit",
-    "test:integration": "turbo run test:integration",
     "docker:up": "docker-compose -f docker/docker-compose.yml up -d",
     "docker:down": "docker-compose -f docker/docker-compose.yml down",
     "docker:build": "docker-compose -f docker/docker-compose.yml build",

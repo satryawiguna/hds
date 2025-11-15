@@ -9,10 +9,7 @@ export const metadata: Metadata = {
 
 export default function RegisterPage() {
   return (
-    <AuthLayout
-      title="Create an account"
-      description="Get started with HDS"
-    >
+    <AuthLayout title="Create an account" description="Get started with HDS">
       <RegisterForm />
     </AuthLayout>
   );

@@ -133,7 +133,7 @@ describe("TaskController", () => {
           "Task 1",
           "Desc 1",
           TaskStatus.TO_DO,
-          "user-1",
+          "user-123",
           new Date(),
           new Date()
         ),
@@ -142,7 +142,7 @@ describe("TaskController", () => {
           "Task 2",
           "Desc 2",
           TaskStatus.IN_PROGRESS,
-          "user-2",
+          "user-123",
           new Date(),
           new Date()
         ),
@@ -161,6 +161,13 @@ describe("TaskController", () => {
         mockNext
       );
 
+      expect(mockGetAllExecute).toHaveBeenCalledWith(
+        undefined,
+        undefined,
+        expect.objectContaining({
+          createdBy: "user-123",
+        })
+      );
       expect(mockResponse.json).toHaveBeenCalledWith(
         expect.objectContaining({
           status: "success",
@@ -189,6 +196,13 @@ describe("TaskController", () => {
         mockNext
       );
 
+      expect(mockGetAllExecute).toHaveBeenCalledWith(
+        1,
+        10,
+        expect.objectContaining({
+          createdBy: "user-123",
+        })
+      );
       expect(mockResponse.json).toHaveBeenCalled();
     });
 
@@ -208,6 +222,14 @@ describe("TaskController", () => {
         mockNext
       );
 
+      expect(mockGetAllExecute).toHaveBeenCalledWith(
+        undefined,
+        undefined,
+        expect.objectContaining({
+          status: TaskStatus.TO_DO,
+          createdBy: "user-123",
+        })
+      );
       expect(mockResponse.json).toHaveBeenCalled();
     });
   });

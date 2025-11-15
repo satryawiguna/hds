@@ -27,7 +27,7 @@ export class TaskRepository implements ITaskRepository {
   async findAll(
     page?: number,
     limit?: number,
-    filters?: { key?: string; status?: TaskStatus }
+    filters?: { key?: string; status?: TaskStatus; createdBy?: string }
   ): Promise<{ tasks: Task[]; total: number }> {
     let query = this.db<TaskModel>("tasks");
     let countQuery = this.db<TaskModel>("tasks");
@@ -44,6 +44,11 @@ export class TaskRepository implements ITaskRepository {
     if (filters?.status) {
       query = query.where("status", filters.status);
       countQuery = countQuery.where("status", filters.status);
+    }
+
+    if (filters?.createdBy) {
+      query = query.where("created_by", filters.createdBy);
+      countQuery = countQuery.where("created_by", filters.createdBy);
     }
 
     const countResult = await countQuery

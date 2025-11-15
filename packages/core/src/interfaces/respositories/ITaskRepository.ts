@@ -7,7 +7,7 @@ export interface ITaskRepository {
   findAll(
     page?: number,
     limit?: number,
-    filters?: { key?: string; status?: TaskStatus }
+    filters?: { key?: string; status?: TaskStatus; createdBy?: string }
   ): Promise<{ tasks: Task[]; total: number }>;
   update(task: Task): Promise<Task>;
   delete(id: string): Promise<void>;

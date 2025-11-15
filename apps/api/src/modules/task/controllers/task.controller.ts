@@ -61,6 +61,7 @@ export class TaskController {
 
   async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
+      const authReq = req as AuthRequest;
       const query = await getTasksQuerySchema.validate(req.query, {
         abortEarly: false,
       });
@@ -68,6 +69,7 @@ export class TaskController {
       const filters = {
         key: query.key,
         status: query.status,
+        createdBy: authReq.user!.id,
       };
 
       const { tasks, total } = await getAllTasksUseCase.execute(
