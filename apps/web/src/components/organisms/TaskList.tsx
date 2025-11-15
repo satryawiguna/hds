@@ -25,8 +25,8 @@ import { Eye, Pencil, Trash2 } from "lucide-react";
 
 export const TaskList: React.FC = () => {
   const router = useRouter();
-  const [searchInput, setSearchInput] = React.useState(""); // Local state for input
-  const [searchKey, setSearchKey] = React.useState(""); // Debounced value for API
+  const [searchInput, setSearchInput] = React.useState("");
+  const [searchKey, setSearchKey] = React.useState("");
   const [statusFilter, setStatusFilter] = React.useState<TaskStatus | "">("");
   const [currentPage, setCurrentPage] = React.useState<number>(
     TASK_CONSTANTS.DEFAULT_PAGE

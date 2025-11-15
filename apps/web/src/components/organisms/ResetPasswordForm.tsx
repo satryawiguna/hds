@@ -7,10 +7,7 @@ import { Button } from "@/components/atoms/Button";
 import { FormField } from "@/components/molecules/FormField";
 import { Alert, AlertDescription } from "@/components/atoms/Alert";
 import { useResetPassword } from "@/hooks/useAuth";
-import {
-  resetPasswordSchema,
-  ResetPasswordFormData,
-} from "@/validators/auth.validations";
+import { resetPasswordSchema, ResetPasswordFormData } from "@hds/shared";
 
 interface ResetPasswordFormProps {
   token: string;
@@ -24,7 +21,8 @@ export const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
     handleSubmit,
     formState: { errors },
   } = useForm<ResetPasswordFormData>({
-    resolver: yupResolver(resetPasswordSchema),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: yupResolver(resetPasswordSchema as any),
   });
 
   const resetPasswordMutation = useResetPassword();

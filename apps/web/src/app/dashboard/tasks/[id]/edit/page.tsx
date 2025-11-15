@@ -4,7 +4,7 @@ import { useRouter, useParams } from "next/navigation";
 import { DashboardLayout } from "@/components/templates/DashboardLayout";
 import { TaskForm } from "@/components/molecules/TaskForm";
 import { useTask, useUpdateTask } from "@/hooks/useTask";
-import { UpdateTaskFormData } from "@/validators/task.validators";
+import { UpdateTaskFormData } from "@hds/shared";
 import { TASK_ROUTES } from "@hds/shared";
 import {
   Card,

@@ -8,7 +8,7 @@ import { Button } from "@/components/atoms/Button";
 import { FormField } from "@/components/molecules/FormField";
 import { Alert, AlertDescription } from "@/components/atoms/Alert";
 import { useLogin } from "@/hooks/useAuth";
-import { loginSchema, LoginFormData } from "@/validators/auth.validations";
+import { loginSchema, LoginFormData } from "@hds/shared";
 import { AUTH_ROUTES } from "@hds/shared";
 
 export const LoginForm: React.FC = () => {

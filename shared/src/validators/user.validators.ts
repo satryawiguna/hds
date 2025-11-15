@@ -16,5 +16,5 @@ export const getUsersQuerySchema = yup.object({
   limit: yup.number().integer().min(1).max(100).optional(),
 });
 
-export type UpdateUserDTO = yup.InferType<typeof updateUserSchema>;
-export type GetUsersQueryDTO = yup.InferType<typeof getUsersQuerySchema>;
+export type UpdateUserFormData = yup.InferType<typeof updateUserSchema>;
+export type GetUsersQueryFormData = yup.InferType<typeof getUsersQuerySchema>;

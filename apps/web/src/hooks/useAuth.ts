@@ -8,7 +8,7 @@ import {
   RegisterFormData,
   ForgotPasswordFormData,
   ResetPasswordFormData,
-} from "@/validators/auth.validations";
+} from "@hds/shared";
 import {
   ApiResponse,
   LoginResponseDTO,

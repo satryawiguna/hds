@@ -15,7 +15,7 @@ import {
   createTaskSchema,
   updateTaskSchema,
   getTasksQuerySchema,
-} from "../dtos";
+} from "@hds/shared";
 
 const taskRepository = new TaskRepository(db);
 

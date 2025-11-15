@@ -8,10 +8,7 @@ import { Button } from "@/components/atoms/Button";
 import { FormField } from "@/components/molecules/FormField";
 import { Alert, AlertDescription } from "@/components/atoms/Alert";
 import { useRegister } from "@/hooks/useAuth";
-import {
-  registerSchema,
-  RegisterFormData,
-} from "@/validators/auth.validations";
+import { registerSchema, RegisterFormData } from "@hds/shared";
 import { AUTH_ROUTES } from "@hds/shared";
 
 export const RegisterForm: React.FC = () => {
@@ -20,7 +17,8 @@ export const RegisterForm: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterFormData>({
-    resolver: yupResolver(registerSchema),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: yupResolver(registerSchema as any),
   });
 
   const registerMutation = useRegister();

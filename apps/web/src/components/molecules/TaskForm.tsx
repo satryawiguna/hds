@@ -14,7 +14,7 @@ import {
   updateTaskSchema,
   CreateTaskFormData,
   UpdateTaskFormData,
-} from "@/validators/task.validators";
+} from "@hds/shared";
 
 export interface TaskFormProps {
   mode: "create" | "edit";
@@ -37,15 +37,15 @@ export const TaskForm: React.FC<TaskFormProps> = ({
   onCancel,
   isSubmitting = false,
 }) => {
+  const schema = mode === "create" ? createTaskSchema : updateTaskSchema;
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<CreateTaskFormData | UpdateTaskFormData>({
-    resolver: yupResolver(
-      mode === "create" ? createTaskSchema : updateTaskSchema
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ) as any,
+  } = useForm({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: yupResolver(schema as any),
     defaultValues: defaultValues || {
       title: "",
       description: "",

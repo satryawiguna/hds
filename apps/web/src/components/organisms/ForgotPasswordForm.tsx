@@ -8,10 +8,7 @@ import { Button } from "@/components/atoms/Button";
 import { FormField } from "@/components/molecules/FormField";
 import { Alert, AlertDescription } from "@/components/atoms/Alert";
 import { useForgotPassword } from "@/hooks/useAuth";
-import {
-  forgotPasswordSchema,
-  ForgotPasswordFormData,
-} from "@/validators/auth.validations";
+import { forgotPasswordSchema, ForgotPasswordFormData } from "@hds/shared";
 import { AUTH_ROUTES } from "@hds/shared";
 
 export const ForgotPasswordForm: React.FC = () => {
