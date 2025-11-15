@@ -1,4 +1,4 @@
 
-> @hds/shared@1.0.0 type-check /Users/satryawiguna/Documents/Practices/happy-day-services/hds-pseudo/shared
+> @hds/shared@1.0.0 type-check /Users/satryawiguna/Documents/Practices/happy-day-services/hds/shared
 > tsc --noEmit
 

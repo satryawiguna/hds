@@ -1,4 +1,4 @@
 
-> @hds/infrastructure@1.0.0 type-check /Users/satryawiguna/Documents/Practices/happy-day-services/hds-pseudo/packages/infrastructure
+> @hds/infrastructure@1.0.0 type-check /Users/satryawiguna/Documents/Practices/happy-day-services/hds/packages/infrastructure
 > tsc --noEmit
 
