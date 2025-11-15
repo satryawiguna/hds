@@ -10,6 +10,9 @@
     "type-check": "tsc --noEmit",
     "test": "jest --passWithNoTests"
   },
+  "dependencies": {
+    "@hds/shared": "workspace:*"
+  },
   "devDependencies": {
     "@types/node": "^20.10.6",
     "typescript": "^5.3.3",
