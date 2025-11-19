@@ -1,6 +1,6 @@
 import { Knex } from "knex";
 import { IUserRepository, User } from "@hds/core";
-import { UserModel } from "../database/models/types";
+import { UserModel } from "../database/models/UserModel";
 
 export class UserRepository implements IUserRepository {
   constructor(private readonly db: Knex) {}

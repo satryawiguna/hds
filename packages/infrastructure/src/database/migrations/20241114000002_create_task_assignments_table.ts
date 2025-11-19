@@ -15,7 +15,7 @@ export async function up(knex: Knex): Promise<void> {
       .references("id")
       .inTable("users")
       .onDelete("CASCADE");
-    table.uuid("project_id").nullable(); // Prepared for future multiple project feature
+    table.uuid("project_id").nullable();
     table.timestamps(true, true);
 
     // Indexes

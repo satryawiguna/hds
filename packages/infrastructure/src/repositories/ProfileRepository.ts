@@ -1,6 +1,6 @@
 import { Knex } from "knex";
 import { IProfileRepository, Profile } from "@hds/core";
-import { ProfileModel } from "../database/models/types";
+import { ProfileModel } from "../database/models/ProfileModel";
 
 export class ProfileRepository implements IProfileRepository {
   constructor(private readonly db: Knex) {}
