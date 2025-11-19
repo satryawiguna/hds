@@ -1,7 +1,7 @@
 import { Knex } from "knex";
 import { ITaskRepository, Task } from "@hds/core";
 import { TaskStatus } from "@hds/shared";
-import { TaskModel } from "../database/models/types";
+import { TaskModel } from "../database/models/TaskModel";
 
 export class TaskRepository implements ITaskRepository {
   constructor(private readonly db: Knex) {}
